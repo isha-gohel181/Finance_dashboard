@@ -29,9 +29,9 @@ const preferences = [
 
 export function Settings() {
   return (
-    <div className="space-y-8 animate-in fade-in duration-700">
+    <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-700">
       <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-extrabold tracking-tight">Settings</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Settings</h1>
         <p className="text-slate-500 dark:text-slate-400">
           Adjust report delivery, alerts, and workspace preferences.
         </p>
@@ -46,18 +46,21 @@ export function Settings() {
         </CardHeader>
         <CardContent className="space-y-4">
           {preferences.map((item) => (
-            <div key={item.title} className="flex items-center justify-between gap-4">
+            <div
+              key={item.title}
+              className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+            >
               <div>
                 <div className="text-sm font-medium">{item.title}</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400">
                   {item.description}
                 </div>
               </div>
-              <Switch defaultChecked={item.defaultChecked} />
+              <Switch defaultChecked={item.defaultChecked} className="self-start sm:self-auto" />
             </div>
           ))}
         </CardContent>
-        <CardFooter className="justify-end">
+        <CardFooter className="flex flex-row flex-nowrap items-center justify-end gap-2">
           <Button>Save changes</Button>
         </CardFooter>
       </Card>
@@ -69,7 +72,7 @@ export function Settings() {
             Manage visibility, access, and default currency settings.
           </CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
           <div className="rounded-3xl border border-slate-200 dark:border-slate-800 p-4">
             <div className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
               Default currency
@@ -89,7 +92,7 @@ export function Settings() {
             <div className="mt-2 text-lg font-semibold">Admin</div>
           </div>
         </CardContent>
-        <CardFooter className="justify-end gap-2">
+        <CardFooter className="flex flex-row flex-nowrap items-center justify-end gap-2">
           <Button variant="outline">Manage members</Button>
           <Button>Update workspace</Button>
         </CardFooter>

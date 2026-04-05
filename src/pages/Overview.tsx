@@ -7,9 +7,9 @@ import { Insights } from '../components/dashboard/Insights';
 
 export function Overview() {
   return (
-    <div className="space-y-8 animate-in fade-in duration-700">
+    <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-700">
       <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-extrabold tracking-tight">Overview</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Overview</h1>
         <p className="text-slate-500 dark:text-slate-400">
           Welcome back, track your financial performance and spending habits.
         </p>
@@ -17,7 +17,7 @@ export function Overview() {
 
       <SummaryCards />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
         <div className="lg:col-span-2">
           <BalanceChart />
         </div>

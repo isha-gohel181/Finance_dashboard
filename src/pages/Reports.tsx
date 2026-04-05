@@ -72,10 +72,10 @@ export function Reports() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-700">
+    <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-700">
       <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-extrabold tracking-tight">Reports</h1>
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Reports</h1>
           <Badge variant="secondary">Beta</Badge>
         </div>
         <p className="text-slate-500 dark:text-slate-400">
@@ -83,7 +83,7 @@ export function Reports() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
         {highlights.map((item) => (
           <Card key={item.label} size="sm">
             <CardHeader>
@@ -101,7 +101,7 @@ export function Reports() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {reportCards.map((report) => (
           <Card key={report.title}>
             <CardHeader>
@@ -118,7 +118,7 @@ export function Reports() {
                 {report.status}
               </Badge>
             </CardContent>
-            <CardFooter className="gap-2">
+            <CardFooter className="flex flex-row flex-nowrap items-center gap-2">
               <Button size="sm">View report</Button>
               <Button
                 size="sm"
