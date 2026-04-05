@@ -22,6 +22,11 @@ A modern, responsive financial dashboard built with React, TypeScript, and Tailw
 - **Sort Capability** - Sort by Date and Amount with ascending/descending toggle
 - **Empty State** - Helpful message when no transactions match filters
 
+### 🧭 Multi-Page Navigation
+- **Overview** - Main dashboard with cards, charts, insights, and transactions
+- **Reports** - Executive-style report cards with CSV export
+- **Settings** - Notification toggles and workspace configuration
+
 ### 👥 Role-Based Access Control
 - **Viewer Mode** - Read-only access to view financial data
 - **Admin Mode** - Full access including:
@@ -47,12 +52,13 @@ A modern, responsive financial dashboard built with React, TypeScript, and Tailw
 
 ## 🛠️ Tech Stack
 
-- **Frontend Framework**: React 18 + TypeScript
+- **Frontend Framework**: React 19 + TypeScript
 - **Styling**: Tailwind CSS
 - **Charting**: Recharts
 - **Icons**: Hugeicons
 - **Build Tool**: Vite
 - **State Management**: React Context API
+- **Routing**: React Router
 - **UI Components**: Custom components + shadcn/ui inspired design
 
 ---
@@ -85,11 +91,15 @@ src/
 │   └── DashboardContext.tsx           # Global state management
 ├── data/
 │   └── mockData.ts                    # Sample transaction data
+├── pages/
+│   ├── Overview.tsx                    # Dashboard overview page
+│   ├── Reports.tsx                     # Reports page with CSV export
+│   └── Settings.tsx                    # Settings page
 ├── types/
 │   └── index.ts                       # TypeScript types & interfaces
 ├── lib/
 │   └── utils.ts                       # Utility functions
-├── App.tsx                            # Root component
+├── App.tsx                            # Routes and layout
 └── main.tsx                           # Entry point
 ```
 
@@ -133,11 +143,16 @@ The optimized production build will be in the `dist/` directory.
 ## 💻 Usage
 
 ### Viewing Data
-1. Dashboard loads with default **Viewer** role
+1. Dashboard loads with default **Admin** role (or saved role from localStorage)
 2. View all summary cards, charts, and transaction history
 3. Use search bar to find specific transactions
 4. Filter by Income/Expense using the dropdown
 5. Click column headers to sort transactions
+
+### Navigating Pages
+1. Use the left sidebar to switch between Overview, Reports, and Settings
+2. Reports page offers prebuilt report cards for executive review
+3. Settings page contains notification and workspace preferences
 
 ### Managing Transactions (Admin Only)
 1. Toggle to **Admin** role in the sidebar
@@ -145,6 +160,11 @@ The optimized production build will be in the `dist/` directory.
 3. Fill in transaction details (Date, Amount, Category, Type)
 4. Click delete icon on any transaction row to remove it
 5. Transactions are instantly saved to localStorage
+
+### Exporting Reports
+1. Open the **Reports** page
+2. Click **Export CSV** on any report card
+3. A CSV file downloads with the current transaction data
 
 ### Viewing Insights
 - Scroll down to see key financial insights
@@ -183,6 +203,18 @@ Main layout component with:
 - Left sidebar with navigation
 - Role switcher toggle
 - Main content area for children
+
+### Reports
+Executive-style report page with:
+- KPI highlight cards
+- Report cards with export actions
+- CSV export of current transactions
+
+### Settings
+Configuration page with:
+- Notification toggles
+- Workspace summary cards
+- Primary actions for updates
 
 ### SummaryCards
 Three cards showing:

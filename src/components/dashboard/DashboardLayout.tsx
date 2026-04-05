@@ -1,4 +1,5 @@
 import React, { type ReactNode } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 import { useDashboard } from '../../context/DashboardContext';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { 
@@ -10,7 +11,7 @@ import {
 import { Switch } from '../ui/switch';
 
 interface LayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
@@ -30,9 +31,9 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
         </div>
 
         <nav className="flex flex-col gap-1 p-4 flex-1">
-          <NavItem icon={<HugeiconsIcon icon={DashboardSquare01Icon} size={20} />} label="Overview" active />
-          <NavItem icon={<HugeiconsIcon icon={PieChart01Icon} size={20} />} label="Transactions" />
-          <NavItem icon={<HugeiconsIcon icon={Settings01Icon} size={20} />} label="Settings" />
+          <NavItem to="/" end icon={<HugeiconsIcon icon={DashboardSquare01Icon} size={20} />} label="Overview" />
+          <NavItem to="/reports" icon={<HugeiconsIcon icon={PieChart01Icon} size={20} />} label="Reports" />
+          <NavItem to="/settings" icon={<HugeiconsIcon icon={Settings01Icon} size={20} />} label="Settings" />
         </nav>
 
         <div className="p-4 border-t border-slate-200 dark:border-slate-800">
@@ -58,20 +59,36 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 overflow-auto">
         <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
-          {children}
+          {children ?? <Outlet />}
         </div>
       </main>
     </div>
   );
 };
 
-const NavItem = ({ icon, label, active = false }: { icon: React.ReactNode, label: string, active?: boolean }) => (
-  <button className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
-    active 
-    ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 shadow-sm shadow-indigo-500/10' 
-    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100'
-  }`}>
+const NavItem = ({
+  icon,
+  label,
+  to,
+  end,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  to: string;
+  end?: boolean;
+}) => (
+  <NavLink
+    to={to}
+    end={end}
+    className={({ isActive }) =>
+      `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+        isActive
+          ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 shadow-sm shadow-indigo-500/10'
+          : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100'
+      }`
+    }
+  >
     {icon}
     {label}
-  </button>
+  </NavLink>
 );
