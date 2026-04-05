@@ -17,18 +17,13 @@ type ThemeProviderState = {
 }
 
 const COLOR_SCHEME_QUERY = "(prefers-color-scheme: dark)"
-const THEME_VALUES: Theme[] = ["dark", "light", "system"]
 
 const ThemeProviderContext = React.createContext<
   ThemeProviderState | undefined
 >(undefined)
 
 function isTheme(value: string | null): value is Theme {
-  if (value === null) {
-    return false
-  }
-
-  return THEME_VALUES.includes(value as Theme)
+  return value === "dark" || value === "light" || value === "system"
 }
 
 function getSystemTheme(): ResolvedTheme {
@@ -58,25 +53,6 @@ function disableTransitionsTemporarily() {
   }
 }
 
-function isEditableTarget(target: EventTarget | null) {
-  if (!(target instanceof HTMLElement)) {
-    return false
-  }
-
-  if (target.isContentEditable) {
-    return true
-  }
-
-  const editableParent = target.closest(
-    "input, textarea, select, [contenteditable='true']"
-  )
-  if (editableParent) {
-    return true
-  }
-
-  return false
-}
-
 export function ThemeProvider({
   children,
   defaultTheme = "system",
@@ -85,19 +61,18 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setThemeState] = React.useState<Theme>(() => {
-    // const storedTheme = localStorage.getItem(storageKey)
-    // if (isTheme(storedTheme)) {
-    //   return storedTheme
-    // }
+    const storedTheme = localStorage.getItem(storageKey)
+    if (isTheme(storedTheme)) {
+      return storedTheme
+    }
 
-    return "light"
+    return defaultTheme === "system" ? "light" : defaultTheme
   })
 
   const setTheme = React.useCallback(
     (nextTheme: Theme) => {
-      // Dark theme disabled - Light mode only
-      // localStorage.setItem(storageKey, nextTheme)
-      // setThemeState(nextTheme)
+      localStorage.setItem(storageKey, nextTheme)
+      setThemeState(nextTheme)
     },
     [storageKey]
   )
@@ -140,72 +115,30 @@ export function ThemeProvider({
     }
   }, [theme, applyTheme])
 
-  // Dark theme disabled - keyboard shortcut commented out
-  // React.useEffect(() => {
-  //   const handleKeyDown = (event: KeyboardEvent) => {
-  //     if (event.repeat) {
-  //       return
-  //     }
+  React.useEffect(() => {
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.storageArea !== localStorage) {
+        return
+      }
 
-  //     if (event.metaKey || event.ctrlKey || event.altKey) {
-  //       return
-  //     }
+      if (event.key !== storageKey) {
+        return
+      }
 
-  //     if (isEditableTarget(event.target)) {
-  //       return
-  //     }
+      if (isTheme(event.newValue)) {
+        setThemeState(event.newValue)
+        return
+      }
 
-  //     if (event.key.toLowerCase() !== "d") {
-  //       return
-  //     }
+      setThemeState(defaultTheme)
+    }
 
-  //     setThemeState((currentTheme) => {
-  //       const nextTheme =
-  //         currentTheme === "dark"
-  //           ? "light"
-  //           : currentTheme === "light"
-  //             ? "dark"
-  //             : getSystemTheme() === "dark"
-  //               ? "light"
-  //               : "dark"
+    window.addEventListener("storage", handleStorageChange)
 
-  //       localStorage.setItem(storageKey, nextTheme)
-  //       return nextTheme
-  //     })
-  //   }
-
-  //   window.addEventListener("keydown", handleKeyDown)
-
-  //   return () => {
-  //     window.removeEventListener("keydown", handleKeyDown)
-  //   }
-  // }, [storageKey])
-
-  // Dark theme disabled - storage listener commented out
-  // React.useEffect(() => {
-  //   const handleStorageChange = (event: StorageEvent) => {
-  //     if (event.storageArea !== localStorage) {
-  //       return
-  //     }
-
-  //     if (event.key !== storageKey) {
-  //       return
-  //     }
-
-  //     if (isTheme(event.newValue)) {
-  //       setThemeState(event.newValue)
-  //       return
-  //     }
-
-  //     setThemeState(defaultTheme)
-  //   }
-
-  //   window.addEventListener("storage", handleStorageChange)
-
-  //   return () => {
-  //     window.removeEventListener("storage", handleStorageChange)
-  //   }
-  // }, [defaultTheme, storageKey])
+    return () => {
+      window.removeEventListener("storage", handleStorageChange)
+    }
+  }, [defaultTheme, storageKey])
 
   const value = React.useMemo(
     () => ({

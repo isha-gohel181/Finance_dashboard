@@ -18,9 +18,9 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
   const { role, setRole } = useDashboard();
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-slate-50/50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 md:flex-row md:overflow-hidden">
+    <div className="flex h-screen w-full flex-col bg-slate-50/50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 md:flex-row overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-full border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 md:h-screen md:w-64 md:border-b-0 md:border-r">
+      <aside className="flex w-full flex-col border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 md:h-screen md:w-64 md:border-b-0 md:border-r md:sticky md:top-0 md:overflow-hidden">
         <div className="flex h-16 items-center px-4 sm:px-6 border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-indigo-600 flex items-center justify-center">
@@ -36,7 +36,7 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
           <NavItem to="/settings" icon={<HugeiconsIcon icon={Settings01Icon} size={20} />} label="Settings" />
         </nav>
 
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 mt-auto">
           <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">Current Role</span>
@@ -57,7 +57,7 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 min-w-0 overflow-auto">
+      <main className="flex-1 min-w-0 overflow-y-auto">
         <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto w-full">
           {children ?? <Outlet />}
         </div>
