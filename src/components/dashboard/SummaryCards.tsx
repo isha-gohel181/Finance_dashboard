@@ -18,7 +18,7 @@ export const SummaryCards: React.FC = () => {
     const balance = income - expenses;
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             <Card className="shadow-lg hover:shadow-xl transition-all border-none bg-gradient-to-br from-indigo-600 to-indigo-700 text-white">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-sm font-medium text-white/80 uppercase tracking-wider">Total Balance</CardTitle>

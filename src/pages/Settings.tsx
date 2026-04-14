@@ -1,5 +1,6 @@
 import { Button } from '../components/ui/button';
 import { Switch } from '../components/ui/switch';
+import { useDashboard } from '../context/DashboardContext';
 import {
   Card,
   CardContent,
@@ -28,6 +29,8 @@ const preferences = [
 ];
 
 export function Settings() {
+  const { role, setRole } = useDashboard();
+
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-700">
       <div className="flex flex-col gap-1">
@@ -96,6 +99,33 @@ export function Settings() {
           <Button variant="outline">Manage members</Button>
           <Button>Update workspace</Button>
         </CardFooter>
+      </Card>
+
+      {/* Advanced System Roles */}
+      <Card className="rounded-4xl border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden">
+        <CardHeader className="bg-slate-50 dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800">
+          <CardTitle className="text-lg font-bold">System Roles & Permissions</CardTitle>
+          <CardDescription>
+            Switch between Viewer and Admin modes to manage dashboard capabilities.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="p-6">
+           <div className="flex items-center justify-between p-4 rounded-3xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
+              <div className="space-y-1">
+                <p className="text-sm font-bold">Full Administrator Access</p>
+                <p className="text-xs text-slate-500">Enable advanced features like deleting transactions and modifying budgets.</p>
+              </div>
+              <div className="flex items-center gap-4">
+                 <span className={`text-xs font-black uppercase tracking-widest ${role === 'admin' ? 'text-indigo-600' : 'text-slate-400'}`}>
+                    {role === 'admin' ? 'Active' : 'Disabled'}
+                 </span>
+                 <Switch 
+                    checked={role === 'admin'} 
+                    onCheckedChange={(checked) => setRole(checked ? 'admin' : 'viewer')} 
+                 />
+              </div>
+           </div>
+        </CardContent>
       </Card>
     </div>
   );
