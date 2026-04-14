@@ -11,10 +11,7 @@ import {
   CreditCardIcon,
   CalculatorIcon,
   AiChat01Icon,
-  Search01Icon,
-  Notification03Icon,
   UserCircleIcon,
-  PlusSignIcon,
   Moon02Icon,
   Sun01Icon
 } from '@hugeicons/core-free-icons';

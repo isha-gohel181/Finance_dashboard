@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDashboard } from '../context/DashboardContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
@@ -7,7 +6,6 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { 
   ArrowUp01Icon, 
   ArrowDown01Icon, 
-  Wallet01Icon, 
   Analytics01Icon
 } from '@hugeicons/core-free-icons';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';

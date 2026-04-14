@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDashboard } from '../context/DashboardContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Progress } from '../components/ui/progress';
@@ -10,8 +10,7 @@ import {
   Tick01Icon, 
   Cancel01Icon,
   Wallet01Icon,
-  ArrowUp01Icon,
-  ArrowDown01Icon
+  ArrowUp01Icon
 } from '@hugeicons/core-free-icons';
 
 export const Budgets = () => {

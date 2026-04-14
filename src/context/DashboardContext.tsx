@@ -111,7 +111,7 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
     localStorage.setItem('subscriptions', JSON.stringify(subscriptions));
   }, [subscriptions]);
 
-  const [debts, setDebts] = useState<Debt[]>(() => {
+  const [debts] = useState<Debt[]>(() => {
     const saved = localStorage.getItem('debts');
     return saved ? JSON.parse(saved) : initialDebts;
   });

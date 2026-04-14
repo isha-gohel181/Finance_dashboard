@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Input } from '../components/ui/input';
-import { Button } from '../components/ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { 
   CalculatorIcon, 
-  ArrowRight01Icon, 
   Analytics01Icon,
   Wallet01Icon
 } from '@hugeicons/core-free-icons';
@@ -24,8 +22,6 @@ export const Calculators = () => {
 
     useEffect(() => {
         const data = [];
-        let total = principal;
-        const ratePerMonth = rate / 100 / 12;
         
         for (let i = 0; i <= years; i++) {
             const amount = principal * Math.pow(1 + (rate / 100), i);
@@ -93,7 +89,7 @@ export const Calculators = () => {
                                     <YAxis hide />
                                     <Tooltip 
                                         contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
-                                        formatter={(value) => [`$${value.toLocaleString()}`, 'Balance']}
+                                        formatter={(value) => [`$${Number(value || 0).toLocaleString()}`, 'Balance']}
                                     />
                                     <Area type="monotone" dataKey="amount" stroke="#6366f1" fillOpacity={1} fill="url(#colorAmount)" strokeWidth={3} />
                                 </AreaChart>

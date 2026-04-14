@@ -1,11 +1,10 @@
-import React from 'react';
+import { type ReactNode } from 'react';
 import { useDashboard } from '../context/DashboardContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { 
   Analytics01Icon, 
   ArrowUp01Icon, 
-  ArrowDown01Icon,
   Wallet01Icon,
   AiChat01Icon,
   Tick01Icon
@@ -153,7 +152,7 @@ export const NetWorth = () => {
     );
 };
 
-const Badge = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+const Badge = ({ children, className }: { children: ReactNode; className?: string }) => (
     <span className={`px-2 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase ${className}`}>
         {children}
     </span>

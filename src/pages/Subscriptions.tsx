@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDashboard } from '../context/DashboardContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -6,8 +5,6 @@ import { Switch } from '../components/ui/switch';
 import { Progress } from '../components/ui/progress';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { 
-  Calendar01Icon, 
-  CreditCardIcon, 
   Clock01Icon,
   AlertCircleIcon,
   Analytics01Icon,
